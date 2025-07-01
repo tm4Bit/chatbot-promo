@@ -1,0 +1,226 @@
+{
+	"version": "7.1",
+	"screens": [
+		{
+			"id": "JOIN_NOW",
+			"title": "Cadastrar",
+			"data": {},
+			"layout": {
+				"type": "SingleColumnLayout",
+				"children": [
+					{
+						"type": "Form",
+						"name": "form",
+						"children": [
+							{
+								"type": "TextSubheading",
+								"text": "Informe seus dados pessoais abaixo!"
+							},
+							{
+								"type": "TextInput",
+								"name": "name",
+								"label": "Nome",
+								"input-type": "text",
+								"required": true
+							},
+							{
+								"type": "TextInput",
+								"name": "sobrenome",
+								"label": "Sobrenome",
+								"input-type": "text",
+								"required": true
+							},
+							{
+								"type": "TextInput",
+								"name": "cpf",
+								"label": "CPF",
+								"input-type": "text",
+								"required": true
+							},
+							{
+								"type": "TextInput",
+								"label": "Email",
+								"name": "email",
+								"input-type": "email",
+								"required": true
+							},
+							{
+								"type": "TextInput",
+								"name": "nasc",
+								"label": "Data de nascimento",
+								"input-type": "text",
+								"required": true
+							},
+							{
+								"type": "TextInput",
+								"name": "celular",
+								"label": "Celular",
+								"input-type": "phone",
+								"required": true
+							},
+							{
+								"type": "TextInput",
+								"name": "endereco",
+								"label": "Endereço com número",
+								"input-type": "text",
+								"required": true
+							},
+							{
+								"type": "TextInput",
+								"name": "cep",
+								"label": "CEP",
+								"input-type": "number",
+								"required": true
+							},
+							{
+								"type": "TextInput",
+								"name": "estado",
+								"label": "Estado",
+								"input-type": "text",
+								"required": true
+							},
+							{
+								"type": "TextInput",
+								"name": "cidade",
+								"label": "Cidade",
+								"input-type": "text",
+								"required": true
+							},
+							{
+								"type": "Footer",
+								"label": "Continue",
+								"on-click-action": {
+									"name": "navigate",
+									"next": {
+										"name": "PURCHASE_INFO",
+										"type": "screen"
+									},
+									"payload": {
+										"name": "${form.name}",
+										"sobrenome": "${form.sobrenome}",
+										"cpf": "${form.cpf}",
+										"email": "${form.email}",
+										"nasc": "${form.nasc}",
+										"celular": "${form.celular}",
+										"endereco": "${form.endereco}",
+										"cep": "${form.cep}",
+										"estado": "${form.estado}",
+										"cidade": "${form.cidade}"
+									}
+								}
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"id": "PURCHASE_INFO",
+			"title": "Informações da Compra",
+			"data": {
+				"name": {
+					"type": "string",
+					"__example__": "Example"
+				},
+				"sobrenome": {
+					"type": "string",
+					"__example__": "Example"
+				},
+				"cpf": {
+					"type": "string",
+					"__example__": "Example"
+				},
+				"email": {
+					"type": "string",
+					"__example__": "Example"
+				},
+				"nasc": {
+					"type": "string",
+					"__example__": "Example"
+				},
+				"celular": {
+					"type": "string",
+					"__example__": "Example"
+				},
+				"endereco": {
+					"type": "string",
+					"__example__": "Example"
+				},
+				"cep": {
+					"type": "string",
+					"__example__": "Example"
+				},
+				"estado": {
+					"type": "string",
+					"__example__": "Example"
+				},
+				"cidade": {
+					"type": "string",
+					"__example__": "Example"
+				}
+			},
+			"terminal": true,
+			"success": true,
+			"layout": {
+				"type": "SingleColumnLayout",
+				"children": [
+					{
+						"type": "Form",
+						"name": "purchase_form",
+						"children": [
+							{
+								"type": "TextSubheading",
+								"text": "Agora, informe os dados da sua compra."
+							},
+							{
+								"type": "TextInput",
+								"name": "onde_comprou",
+								"label": "Onde você comprou?",
+								"required": true
+							},
+							{
+								"type": "TextInput",
+								"name": "valor",
+								"label": "Valor (Ex 51.90) ",
+								"input-type": "number",
+								"required": true
+							},
+							{
+								"type": "PhotoPicker",
+								"name": "photo_picker",
+								"label": "Comprovante fiscal",
+								"description": "Envie uma foto do comprovante fiscal",
+								"photo-source": "camera_gallery",
+								"min-uploaded-photos": 1,
+								"max-uploaded-photos": 1,
+								"max-file-size-kb": 10240
+							},
+							{
+								"type": "Footer",
+								"label": "Finalizar Cadastro",
+								"on-click-action": {
+									"name": "complete",
+									"payload": {
+										"name": "${data.name}",
+										"sobrenome": "${data.sobrenome}",
+										"cpf": "${data.cpf}",
+										"email": "${data.email}",
+										"nasc": "${data.nasc}",
+										"celular": "${data.celular}",
+										"endereco": "${data.endereco}",
+										"cep": "${data.cep}",
+										"estado": "${data.estado}",
+										"cidade": "${data.cidade}",
+										"onde_comprou": "${purchase_form.onde_comprou}",
+										"valor": "${purchase_form.valor}",
+										"comprovante": "${purchase_form.comprovante}"
+									}
+								}
+							}
+						]
+					}
+				]
+			}
+		}
+	]
+}

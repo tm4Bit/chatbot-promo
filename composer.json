@@ -1,0 +1,22 @@
+{
+	"name": "ovlk/zapbot",
+	"require": {
+		"slim/slim": "^4.14",
+		"slim/psr7": "^1.7",
+		"slim/csrf": "^1.5",
+		"guzzlehttp/guzzle": "^7.9"
+	},
+	"autoload": {
+		"psr-4": {
+			"Ovlk\\Chatbot\\": "src/",
+			"Core\\": "Core/",
+			"Http\\": "Http/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Tiago Araujo",
+			"email": "tiagomuniz130@gmail.com"
+		}
+	]
+}

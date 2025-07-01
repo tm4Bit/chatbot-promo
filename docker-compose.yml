@@ -1,0 +1,73 @@
+services:
+  # |--------------------|
+  # | Serviço PHP-FPM    |
+  # |--------------------|
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chatbot-promo-app
+    volumes:
+      - ./:/var/www/html
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: chatbotdb
+      DB_USERNAME: admin
+      DB_PASSWORD: secret
+      # Adicione as variáveis da Meta aqui
+      META_ACCESS_TOKEN: "SEU_TOKEN_DE_ACESSO"
+      META_VERIFY_TOKEN: "SEU_TOKEN_DE_VERIFICACAO_SECRETO"
+      META_PHONE_NUMBER_ID: "SEU_ID_DO_NUMERO_DE_TELEFONE"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  # |--------------------|
+  # | Serviço Nginx      |
+  # |--------------------|
+  web:
+    image: nginx:stable-alpine
+    container_name: chatbot-promo-web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - app-network
+
+  # |---------------------------------|
+  # | Serviço do Banco de Dados MySQL |
+  # |---------------------------------|
+  db:
+    image: mysql:8.0
+    container_name: chatbot-promo-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: chatbotdb
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: secret
+    volumes:
+      - chatbot-promo_data:/var/lib/mysql
+    networks:
+      - app-network
+    healthcheck:
+      test:
+        ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uadmin", "-psecret"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  chatbot-promo_data:
