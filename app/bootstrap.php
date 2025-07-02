@@ -55,7 +55,8 @@ $container->bind(PromotionService::class, function () {
 // /////////////////////////////////////////////////
 $container->bind(WebhookUseCase::class, function () {
     return new WebhookUseCase(
-        App::resolve(PromotionService::class)
+        App::resolve(PromotionService::class),
+        App::resolve(MetaApiService::class)
     );
 });
 
