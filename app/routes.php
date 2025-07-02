@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Core\App;
 use Http\Controller\HealthController;
-use Ovlk\Chatbot\Controller\WebhookController;
+use Http\Controller\WebhookController;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Routing\RouteCollectorProxy;
 

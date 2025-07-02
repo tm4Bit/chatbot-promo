@@ -2,25 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Ovlk\Chatbot\Service;
+namespace Ovlk\Chatbot\Services;
 
 use GuzzleHttp\Client;
 
 class MetaApiService
 {
-    private Client $client;
-
     private string $accessToken;
 
     private string $phoneNumberId;
 
-    public function __construct()
+    public function __construct(mixed $metaInfo, private Client $client)
     {
-        $this->accessToken = $_ENV['META_ACCESS_TOKEN'];
-        $this->phoneNumberId = $_ENV['META_PHONE_NUMBER_ID'];
-        $this->client = new Client([
-            'base_uri' => 'https://graph.facebook.com/v20.0/',
-        ]);
+        $this->accessToken = $metaInfo['meta_access_token'];
+        $this->phoneNumberId = $metaInfo['meta_phone_number_id'];
     }
 
     public function sendMessage(string $to, string $text): void

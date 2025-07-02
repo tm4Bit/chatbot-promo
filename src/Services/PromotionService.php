@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ovlk\Chatbot\Service;
+namespace Ovlk\Chatbot\Services;
 
 use Core\Database;
 
